@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Space Invaders</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="cabinet">
+    <div class="screen" id="screen">
+      <canvas id="game" aria-label="Space Invaders game area"></canvas>
+
+      <div class="overlay" id="overlay">
+        <section class="panel" id="panel-title">
+          <h1><span class="t1">SPACE</span><span class="t2">INVADERS</span></h1>
+          <div class="points" id="points-table"></div>
+          <p class="hi">HI-SCORE <span id="title-hi">00000</span></p>
+          <button class="start-btn blink" data-action="start">PRESS ENTER / TAP TO START</button>
+          <ul class="controls">
+            <li><kbd>←</kbd><kbd>→</kbd> or <kbd>A</kbd><kbd>D</kbd> move</li>
+            <li><kbd>SPACE</kbd> fire</li>
+            <li><kbd>P</kbd> pause &nbsp; <kbd>M</kbd> mute</li>
+          </ul>
+        </section>
+
+        <section class="panel hidden" id="panel-paused">
+          <h2>PAUSED</h2>
+          <button class="start-btn blink" data-action="resume">PRESS P / TAP TO RESUME</button>
+        </section>
+
+        <section class="panel hidden" id="panel-gameover">
+          <h2 class="danger">GAME OVER</h2>
+          <p class="final">SCORE <span id="final-score">0</span></p>
+          <p class="new-hi hidden" id="new-hi">★ NEW HIGH SCORE ★</p>
+          <button class="start-btn blink" data-action="start">PRESS ENTER / TAP TO PLAY AGAIN</button>
+        </section>
+      </div>
+    </div>
+
+    <div class="touch" id="touch" aria-hidden="true">
+      <button data-touch="left">◀</button>
+      <button data-touch="fire" class="fire">FIRE</button>
+      <button data-touch="right">▶</button>
+      <button data-touch="pause" class="small">II</button>
+    </div>
+
+    <p class="hint">← → move · SPACE fire · P pause · M mute</p>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

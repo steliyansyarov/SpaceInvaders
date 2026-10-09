@@ -1,0 +1,280 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --green: #7dff6b;
+  --cyan: #4fe3ff;
+  --pink: #ff5fd7;
+  --red: #ff4040;
+  --text: #e8e8ff;
+  --font: "Courier New", Courier, ui-monospace, monospace;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: radial-gradient(ellipse at center, #10101e 0%, #000 75%);
+  color: var(--text);
+  font-family: var(--font);
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.cabinet {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+}
+
+/* 800 x 640 logical canvas => 5:4 aspect ratio */
+.screen {
+  position: relative;
+  width: min(96vw, calc((100vh - 70px) * 1.25));
+  aspect-ratio: 5 / 4;
+  border: 3px solid #2a2a44;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow:
+    0 0 0 6px #0b0b16,
+    0 0 40px rgba(125, 255, 107, 0.15),
+    inset 0 0 60px rgba(0, 0, 0, 0.9);
+}
+
+/* CRT scanlines */
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.035) 0,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: screen;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+/* ---------- Overlay panels ---------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.panel {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 2vmin, 18px);
+  padding: 16px;
+}
+
+h1 {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  font-size: clamp(28px, 7vmin, 64px);
+}
+
+h1 .t1 {
+  color: var(--text);
+  text-shadow: 0 0 12px rgba(232, 232, 255, 0.6);
+}
+
+h1 .t2 {
+  color: var(--green);
+  text-shadow: 0 0 14px rgba(125, 255, 107, 0.7);
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(26px, 6vmin, 54px);
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  text-shadow: 0 0 14px rgba(79, 227, 255, 0.6);
+}
+
+h2.danger {
+  color: var(--red);
+  text-shadow: 0 0 14px rgba(255, 64, 64, 0.7);
+}
+
+.points {
+  display: grid;
+  gap: 6px;
+  font-size: clamp(12px, 2.4vmin, 20px);
+  letter-spacing: 0.1em;
+}
+
+.points .row {
+  display: grid;
+  grid-template-columns: 56px auto;
+  align-items: center;
+  justify-items: start;
+  gap: 12px;
+}
+
+.points .row img {
+  justify-self: center;
+  image-rendering: pixelated;
+  height: clamp(14px, 3vmin, 24px);
+}
+
+.hi,
+.final {
+  margin: 0;
+  font-size: clamp(14px, 2.8vmin, 24px);
+  letter-spacing: 0.1em;
+}
+
+.hi span,
+.final span {
+  color: var(--green);
+}
+
+.new-hi {
+  margin: 0;
+  color: #ffd84f;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.start-btn {
+  font: inherit;
+  font-weight: bold;
+  font-size: clamp(13px, 2.6vmin, 22px);
+  letter-spacing: 0.08em;
+  color: var(--text);
+  background: transparent;
+  border: 2px solid var(--green);
+  border-radius: 4px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.start-btn:hover,
+.start-btn:focus-visible {
+  background: rgba(125, 255, 107, 0.15);
+  outline: none;
+}
+
+.blink {
+  animation: blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.controls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(11px, 2vmin, 16px);
+  color: #aab;
+  display: grid;
+  gap: 4px;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 1px 5px;
+  margin: 0 1px;
+  border: 1px solid #556;
+  border-bottom-width: 3px;
+  border-radius: 4px;
+  font-family: var(--font);
+  color: var(--text);
+  background: #151525;
+}
+
+.hint {
+  margin: 0;
+  font-size: 13px;
+  color: #667;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Touch controls ---------- */
+.touch {
+  display: none;
+  gap: 10px;
+  width: min(96vw, 600px);
+}
+
+.touch button {
+  flex: 1;
+  font: inherit;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text);
+  background: #151525;
+  border: 2px solid #334;
+  border-radius: 10px;
+  padding: 16px 0;
+  touch-action: none;
+}
+
+.touch button:active,
+.touch button.active {
+  background: #24243a;
+  border-color: var(--green);
+}
+
+.touch .fire {
+  flex: 1.6;
+  color: var(--green);
+}
+
+.touch .small {
+  flex: 0.6;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch {
+    display: flex;
+  }
+
+  .hint {
+    display: none;
+  }
+
+  .screen {
+    width: min(96vw, calc((100vh - 120px) * 1.25));
+  }
+}
