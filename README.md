@@ -52,3 +52,8 @@ You earn an **extra life** at 1,500 points and every 3,000 points after that, up
 - `index.html` contains the page, title, pause and game-over screens, and the touch controls.
 - `style.css` holds the arcade-cabinet styling.
 - `game.js` holds all game logic, rendering and sound.
+
+<img width="500" height="404" alt="image" src="https://github.com/user-attachments/assets/73e2f5ad-8eca-4467-8539-0b8b1b11229d" />
+<img width="503" height="398" alt="image" src="https://github.com/user-attachments/assets/fa67bffd-5e13-4750-9321-bdbe1933ef18" />
+
+
